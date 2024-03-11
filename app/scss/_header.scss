@@ -1,0 +1,91 @@
+.header {
+  &__top {
+    display: flex;
+    width: 100%;
+
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--neutral);
+    padding: 15px 12px;
+    border-radius: 12px;
+  }
+  &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px 0;
+  }
+
+  &__logo-link {
+    display: flex;
+    align-items: center;
+  }
+
+  &__actions {
+  }
+}
+
+.menu {
+  display: flex;
+  gap: 0 48px;
+
+  &__item {
+  }
+
+  &__link {
+    font-weight: 500;
+    &:hover {
+      color: var(--accent);
+    }
+  }
+
+  &__link-phone {
+    position: relative;
+    padding-left: 25px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 18px;
+      height: 18px;
+      background-image: url(../images/phone.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+}
+.actions {
+  display: flex;
+  gap: 0 12px;
+  color: var(--grey2);
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--neutral);
+    padding: 16px;
+    border: 1px solid var(--grey);
+    border-radius: 12px;
+
+    &_bp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 24px;
+      font-weight: 500;
+    }
+
+    &:hover {
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      svg {
+        fill: var(--accent);
+      }
+    }
+  }
+}

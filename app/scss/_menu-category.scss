@@ -1,0 +1,31 @@
+.menu-category {
+  padding: 12px 25px;
+  border-radius: 12px;
+  background-color: var(--neutral);
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 0 50px;
+  }
+
+  &__item {
+  }
+
+  &__link {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px 0;
+    font-weight: 500;
+
+    &:hover {
+      color: var(--accent);
+    }
+
+    img {
+      width: 44px;
+      height: 44px;
+    }
+  }
+}
