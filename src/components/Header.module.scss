@@ -1,0 +1,17 @@
+.cartAdd {
+  position: relative;
+}
+.counter {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  background-color: #ff6633;
+  color: #fff;
+  line-height: 0;
+}
