@@ -20,12 +20,27 @@ body {
 
   color: var(--primary);
   background-color: var(--bgMain);
+  min-height: 100dvh;
+}
+
+.q {
+  display: none;
 }
 
 .container {
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 15px;
+}
+
+.burger-menu {
+  padding: 10px;
+  background-color: rgb(245, 245, 247);
+  border-radius: 12px;
+
+  &:hover {
+    background-color: darken(rgb(245, 245, 247), 3);
+  }
 }
 
 .grid {
