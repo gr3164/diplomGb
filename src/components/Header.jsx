@@ -10,7 +10,7 @@ const menu = [
   { id: 5, title: '+8 888 888 88 88', class: 'menu__link menu__link-phone' },
 ];
 
-function Header() {
+function Header({ refOne }) {
   return (
     <header className="header">
       <div className="container">
@@ -29,7 +29,7 @@ function Header() {
                 </li>
               ))}
             </ul>
-            <HeaderActions />
+            <HeaderActions refOne={refOne} />
 
             <button className="burger-menu q">
               <img src="./burger-menu.svg" alt="burger-menu" />
