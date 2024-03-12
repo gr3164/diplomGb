@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import s from './Header.module.scss';
 
 function HeaderActions() {
-  const { curentCart } = useSelector((state) => state.data);
+  const { curentCart, catalog } = useSelector((state) => state.data);
+
+  const [data, setData] = useState([]);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const countObjects = curentCart.reduce((acc, obj) => {
+      acc[obj.id] = (acc[obj.id] || 0) + 1;
+      return acc;
+    }, {});
+  }, [curentCart]);
 
   return (
     <div className="header__actions actions">
@@ -119,6 +129,42 @@ function HeaderActions() {
           </g>
         </svg>
       </button>
+
+      <div className="cart">
+        <div className="cart__top">
+          <div className="cart__title">Ваш заказ</div>
+          <button className="cart__close">X</button>
+        </div>
+        <div className="cart__body">
+          <ul className="cart__list">
+            <li className="cart__item">
+              <div className="cart__left">
+                <img src="" alt="img" />
+                <div className="cart__text-title">
+                  <a href="#"></a>
+                  <p>Вес: </p>
+                </div>
+              </div>
+              <div className="cart__price-count">
+                <div className="cart__price-count_p">
+                  <span>руи</span>
+                </div>
+                <div className="cart__price-count_couner">
+                  <button>-</button>
+
+                  <button>+</button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div className="cart__bottom">
+          <div className="cart__final-price">
+            543 <span>руб</span>
+          </div>
+          <button className="cart__btn">Оформить заказ</button>
+        </div>
+      </div>
     </div>
   );
 }
