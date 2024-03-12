@@ -1,10 +1,13 @@
 .wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
 
   overflow: hidden;
 
   min-height: 100%;
+
+  overflow: hidden;
 }
 
 .main {
@@ -16,6 +19,7 @@
 }
 
 body {
+  position: relative;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -23,6 +27,9 @@ body {
   color: var(--primary);
   background-color: var(--bgMain);
   min-height: 100dvh;
+  .dark {
+    overflow: hidden;
+  }
 }
 
 .q {
