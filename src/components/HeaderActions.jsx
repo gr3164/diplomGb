@@ -1,19 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './Header.module.scss';
+import { setCurentCart, setFilters, setFiltersIncr } from '../redux/slices/dataSlice';
 
-function HeaderActions() {
-  const { curentCart, catalog } = useSelector((state) => state.data);
+function HeaderActions({ refOne }) {
+  const dispatch = useDispatch();
 
-  const [data, setData] = useState([]);
-  const [count, setCount] = useState(0);
+  const { curentCart, catalog, filters, status } = useSelector((state) => state.data);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const countObjects = curentCart.reduce((acc, obj) => {
       acc[obj.id] = (acc[obj.id] || 0) + 1;
       return acc;
     }, {});
+
+    const arrSet = Array.from(new Set(curentCart));
+    const priceAll =
+      arrSet.reduce((acc, item, i) => (acc += item.price), 0) *
+      Object.values(countObjects).reduce((acc, el) => (acc += el), 0);
+    const filter = [arrSet, countObjects, priceAll];
+
+    dispatch(setFilters(filter));
   }, [curentCart]);
+
+  const decriment = (data, id) => {
+    setFiltersIncr(data);
+  };
+
+  const hendleClick = () => {
+    setIsOpen(!isOpen);
+
+    refOne.current.classList.toggle('hiden');
+  };
 
   return (
     <div className="header__actions actions">
@@ -90,7 +109,9 @@ function HeaderActions() {
           </g>
         </svg>
       </button>
-      <button className={s.cartAdd + ' actions__btn' + ' actions__btn_bp'}>
+      <button
+        onClick={() => hendleClick()}
+        className={s.cartAdd + ' actions__btn' + ' actions__btn_bp'}>
         <span>Корзина</span>
         {curentCart.length > 0 && <p className={s.counter}>{curentCart.length}</p>}
         <svg
@@ -130,41 +151,52 @@ function HeaderActions() {
         </svg>
       </button>
 
-      <div className="cart">
-        <div className="cart__top">
-          <div className="cart__title">Ваш заказ</div>
-          <button className="cart__close">X</button>
-        </div>
-        <div className="cart__body">
-          <ul className="cart__list">
-            <li className="cart__item">
-              <div className="cart__left">
-                <img src="" alt="img" />
-                <div className="cart__text-title">
-                  <a href="#"></a>
-                  <p>Вес: </p>
-                </div>
-              </div>
-              <div className="cart__price-count">
-                <div className="cart__price-count_p">
-                  <span>руи</span>
-                </div>
-                <div className="cart__price-count_couner">
-                  <button>-</button>
-
-                  <button>+</button>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div className="cart__bottom">
-          <div className="cart__final-price">
-            543 <span>руб</span>
+      {isOpen && (
+        <div className={isOpen ? 'active cart' : 'cart'}>
+          <div className="cart__top">
+            <div className="cart__title">Ваш заказ</div>
+            <button onClick={() => hendleClick()} className="cart__close">
+              X
+            </button>
           </div>
-          <button className="cart__btn">Оформить заказ</button>
+          <div className="cart__body">
+            <ul className="cart__list">
+              {status == 'resolve' ? (
+                filters[0].map((el) => (
+                  <li key={el.id} className="cart__item">
+                    <div className="cart__left">
+                      <img src={el.src} alt="img" />
+                      <div className="cart__text-title">
+                        <a href="#">{el.title}</a>
+                        <p>Вес: {el.wt}</p>
+                      </div>
+                    </div>
+                    <div className="cart__price-count">
+                      <div className="cart__price-count_p">
+                        {el.price * filters[1][el.id]}
+                        <span>руб</span>
+                      </div>
+                      <div className="cart__price-count_couner">
+                        <button onClick={() => dispatch(setCurentCart(el))}>-</button>
+                        {filters[1][el.id]}
+                        <button onClick={() => dispatch(setCurentCart(el))}>+</button>
+                      </div>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <h5>Корзина пуста</h5>
+              )}
+            </ul>
+          </div>
+          <div className="cart__bottom">
+            <div className="cart__final-price">
+              {filters[2]} <span>руб</span>
+            </div>
+            <button className="cart__btn">Оформить заказ</button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

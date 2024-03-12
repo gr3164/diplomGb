@@ -6,6 +6,7 @@ function Card({ target }) {
   const dispatch = useDispatch();
 
   const onClickAddItemCart = (e) => {
+    // console.log(e.count + 1);
     dispatch(setCurentCart(e));
   };
 
@@ -20,7 +21,12 @@ function Card({ target }) {
               <div className="card__filter">
                 {item.filter &&
                   item.filter.map((_, i) => (
-                    <img className="card__filter-img" src={iconFilter[i]} alt="filtercard" />
+                    <img
+                      key={i}
+                      className="card__filter-img"
+                      src={iconFilter[i]}
+                      alt="filtercard"
+                    />
                   ))}
               </div>
             </div>

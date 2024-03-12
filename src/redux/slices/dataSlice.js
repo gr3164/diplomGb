@@ -24,6 +24,7 @@ const dataSlice = createSlice({
     catalog: [],
     status: null,
     error: null,
+    filters: [],
   },
   reducers: {
     setState(state, action) {
@@ -31,6 +32,12 @@ const dataSlice = createSlice({
     },
     setCurentCart(state, action) {
       state.curentCart = [...state.curentCart, action.payload];
+    },
+    setFilters(state, action) {
+      state.filters = action.payload;
+    },
+    setFiltersIncr(state, action) {
+      console.log(state.filters);
     },
   },
   extraReducers: (builder) => {
@@ -49,6 +56,6 @@ const dataSlice = createSlice({
   },
 });
 
-export const { setState, setCurentCart } = dataSlice.actions;
+export const { setState, setCurentCart, setFilters, setFiltersIncr } = dataSlice.actions;
 
 export default dataSlice.reducer;

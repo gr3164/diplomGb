@@ -281,3 +281,14 @@
     width: 67px;
   }
 }
+
+.hiden {
+  background: #4d4d4d;
+  min-height: 100%;
+  opacity: 0.9;
+  position: relative;
+  min-width: 100%;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+}
